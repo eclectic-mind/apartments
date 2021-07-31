@@ -5,7 +5,7 @@ mixin renderItem(item)
 
   .flat-list-body__row
     .flats-list-body__cell.plan-cell 
-      img(src= '../assets/img/flat' + item.id + '.svg', alt=item.id).flat-plan
+      img(src= 'assets/img/flat' + item.id + '.svg', alt=item.id).flat-plan
     .flats-list-body__cell.title-cell !{fulltitle}
     .flats-list-body__cell.area-cell !{item.area}
     .flats-list-body__cell.floor-cell !{item.floor} <span class="max">из !{item.max} <span class="fl">этаж</span></span> 

@@ -88,8 +88,12 @@ function buildScripts() {
       })
     )
     .pipe(dest("public/scripts/"));
+}
 
-  //return src("src/scripts/**/*.js").pipe(dest("public/scripts/"));
+function buildData() {
+  src("src/data/*.*").pipe(
+    dest("public/data/")
+  );
 }
 
 function buildAssets(cb) {
@@ -105,6 +109,7 @@ function buildAssets(cb) {
 function watchFiles() {
   watch(["src/pages/*.pug", "src/pages/**/*.pug"], buildPages);
   watch(["src/styles/*.scss", "src/styles/**/*.scss"], buildStyles);
+  watch("src/data/*.json", buildData);
   watch(["src/scripts/*.js", "src/scripts/**/*.js"], buildScripts);
   watch("src/assets/**/*.*", buildAssets);
 }
@@ -119,7 +124,7 @@ exports.default = series(
   parallel(
     devServer,
     series(
-      parallel(buildPages, buildStyles, buildScripts, buildAssets),
+      parallel(buildPages, buildStyles, buildData, buildScripts, buildAssets),
       watchFiles
     )
   )

@@ -7,13 +7,13 @@ export const sortData = (array, param, direction) => {
 };
 
 export const findMaxPrice = (data) => {
-  const array = sortData(data, 'price', 'down');
+  const array = sortData(data, 'price', 'up');
   return array[0];
 };
 
 export const findMinPrice = (data) => {
-  const result = sortData(data, 'price', 'up');
-  return result[0];
+  const array = sortData(data, 'price', 'down');
+  return array[0];
 };
 
 export const findMaxArea = (data) => {
@@ -22,8 +22,8 @@ export const findMaxArea = (data) => {
 };
 
 export const findMinArea = (data) => {
-  const result = sortData(data, 'area', 'up');
-  return result[0];
+  const array = sortData(data, 'area', 'up');
+  return array[0];
 };
 
 export const onMousePos = (elem, evt) => {

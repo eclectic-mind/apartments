@@ -21,6 +21,8 @@ const thumbsArea = document.querySelectorAll('.thumb-area');
 const outputsArea = document.querySelectorAll('.output-area');
 
 const roomsRadios = [...radios];
+const controlsArea = [...thumbsArea];
+const controlsPrice = [...thumbsPrice];
 
 const areaSortControl = {
   elem: document.querySelector('#sort-area'),
@@ -53,6 +55,54 @@ filtersArea.setStartValues();
 filtersPrice.setHandlers();
 filtersArea.setHandlers();
 
+controlsPrice[0].addEventListener('mouseup', (evt) => {
+  const outputs = [...outputsPrice];
+  const values = outputs.map((item) => item.value);
+  console.log('price limits: ', values);
+  list.filterDataByPrice(values);
+  console.log('filtered data: ', list.filteredData);
+  if (list.data.length !== list.filteredData.length) {
+    list.rerender();
+    list.setHandlers();
+  }
+});
+
+controlsPrice[1].addEventListener('mouseup', (evt) => {
+  const outputs = [...outputsPrice];
+  const values = outputs.map((item) => item.value);
+  console.log('price limits: ', values);
+  list.filterDataByPrice(values);
+  console.log('filtered data: ', list.filteredData);
+  if (list.data.length !== list.filteredData.length) {
+    list.rerender();
+    list.setHandlers();
+  }
+});
+
+controlsArea[0].addEventListener('mouseup', (evt) => {
+  const outputs = [...outputsArea];
+  const values = outputs.map((item) => item.value);
+  console.log('area limits: ', values);
+  list.filterDataByArea(values);
+  console.log('filtered data: ', list.filteredData);
+  if (list.data.length !== list.filteredData.length) {
+    list.rerender();
+    list.setHandlers();
+  }
+});
+
+controlsArea[1].addEventListener('mouseup', (evt) => {
+  const outputs = [...outputsArea];
+  const values = outputs.map((item) => item.value);
+  console.log('area limits: ', values);
+  list.filterDataByArea(values);
+  console.log('filtered data: ', list.filteredData);
+  if (list.data.length !== list.filteredData.length) {
+    list.rerender();
+    list.setHandlers();
+  }
+});
+
 roomsRadios.map((item) => {
   item.addEventListener('click', (evt) => {
     if (item.disabled) return;
@@ -66,25 +116,7 @@ roomsRadios.map((item) => {
 form.addEventListener('reset', (evt) => {
   filtersPrice.setStartValues();
   filtersArea.setStartValues();
-  list.filterDataByRooms(null);
-  list.filterDataByPrice([]);
-  list.filterDataByArea([]);
-  list.rerender();
-  list.setHandlers();
-});
-
-wrapperPrice.addEventListener('mouseout', (evt) => {
-  const thumbs = [...outputsPrice];
-  const values = thumbs.map((item) => item.value);
-  list.filterDataByPrice(values);
-  list.rerender();
-  list.setHandlers();
-});
-
-wrapperArea.addEventListener('mouseout', (evt) => {
-  const thumbs = [...outputsArea];
-  const values = thumbs.map((item) => item.value);
-  list.filterDataByArea(values);
+  list.filteredData = list.data;
   list.rerender();
   list.setHandlers();
 });

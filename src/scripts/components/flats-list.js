@@ -1,10 +1,11 @@
-import { sortData, findMinPrice, findMaxPrice, findMiArea, findMaxArea } from '../utils.js';
+import { sortData, findMinPrice, findMaxPrice, findMinArea, findMaxArea } from '../utils.js';
 import { FIRST_PORTION, PORTION } from '../constants.js';
 
 const makeItemMarkup = (data) => {
   let price = parseFloat(data.price);
   price = price.toLocaleString('ru');
-  const picture = data.id > 112 ? '' : `<img class="flat-plan" alt=${data.id} src="../assets/img/flat${data.id}.svg">`;
+  const altText = 'Квартира № ' + data.id;
+  const picture = data.id > 112 ? '' : `<img class="flat-plan" alt=${altText} src="assets/img/flat${data.id}.svg">`;
 
   return (`<div class="flat-list-body__row">
     <div class="flats-list-body__cell plan-cell">${picture}</div>
@@ -14,62 +15,69 @@ const makeItemMarkup = (data) => {
     <div class="flats-list-body__cell price-cell">${price} <span class="ruble"></span></div>
     </div>`);
 };
-
 export default class List {
 
   constructor(data, container, more, areaSort, priceSort, floorSort) {
     this.data = data;
-    this.filteredData = [];
+    this.filteredData = [...this.data];
     this.container = container;
     this.itemsShown = 0;
     this.buttonMore = more;
     this.areaSort = areaSort;
     this.priceSort = priceSort;
     this.floorSort = floorSort;
-    this.roomsQuantity = null;
-    this.priceRange = [];
-    this.areaRange = [];
   }
 
   filterDataByRooms(value) {
-    const result = this.data.filter((item) => parseFloat(item.rooms) === parseFloat(value));
+    const copy = [...this.data];
+    const result = copy.filter((item) => parseFloat(item.rooms) === parseFloat(value));
     this.filteredData = result;
   }
 
   filterDataByPrice(array) {
     const [min, max] = array;
     let newMin = !min ? findMinPrice(this.data) : min;
-    let newMax = !max ? findMinPrice(this.data) : max;
-    const result = this.data.filter((item) => {
+    let newMax = !max ? findMaxPrice(this.data) : max;
+    const copy = [...this.data];
+    const result = copy.filter((item) => {
       let value = parseFloat(item.price);
       if (value > newMin && value < newMax) return item;
     });
     this.filteredData = result;
+    console.log(this.data, newMin, newMax, this.filteredData);
   }
 
   filterDataByArea(array) {
     const [min, max] = array;
     let newMin = !min ? findMinArea(this.data) : min;
     let newMax = !max ? findMaxArea(this.data) : max;
-    const result = this.data.filter((item) => {
+    const copy = [...this.data];
+    const result = copy.filter((item) => {
       let value = parseFloat(item.area);
       if (value > newMin && value < newMax) return item;
     });
     this.filteredData = result;
+    console.log(this.data, newMin, newMax, this.filteredData);
   }
 
   render() {
     
-    const copy = this.filteredData.length > 0 ? [...this.filteredData] : [...this.data];
+    const copy = [...this.filteredData];
 
     if (this.itemsShown === 0) {
       this.itemsShown = FIRST_PORTION;
     }
-    
-    const dataToRender = this.getPortion(copy);
 
-    let markup = dataToRender.map((item) => makeItemMarkup(item));
-    markup = markup.join('');
+    let markup = '';
+
+    if (copy.length === 0) {
+      markup = `<p>Не нашлось ни одной квартиры, удовлетворяющей заданным условиям</p>`;
+    } else {
+      const dataToRender = this.getPortion(copy);
+      markup = dataToRender.map((item) => makeItemMarkup(item));
+      markup = markup.join('');
+    }
+    
     this.container.innerHTML += markup;
     
     if (this.itemsShown < copy.length && copy.length > FIRST_PORTION) {
@@ -131,7 +139,7 @@ export default class List {
       const target = evt.target;
 
       if (target.classList.contains('sort-link-up')) {
-        this.data = sortData(this.data, 'area', 'up');
+        this.filteredData = sortData(this.filteredData, 'area', 'up');
         this.rerender();
         this.cancelAllSortings();
         this.areaSort.elem.classList.add('cell-chosen'); 
@@ -139,7 +147,7 @@ export default class List {
       }
 
       if (target.classList.contains('sort-link-down')) {
-        this.data = sortData(this.data, 'area', 'down');
+        this.filteredData = sortData(this.filteredData, 'area', 'down');
         this.rerender();
         this.cancelAllSortings();
         this.areaSort.elem.classList.add('cell-chosen'); 
@@ -152,7 +160,7 @@ export default class List {
       const target = evt.target;
 
       if (target.classList.contains('sort-link-up')) {
-        this.data = sortData(this.data, 'price', 'up');
+        this.filteredData = sortData(this.filteredData, 'price', 'up');
         this.rerender();
         this.cancelAllSortings();
         this.priceSort.elem.classList.add('cell-chosen'); 
@@ -160,7 +168,7 @@ export default class List {
       }
 
       if (target.classList.contains('sort-link-down')) {
-        this.data = sortData(this.data, 'price', 'down');
+        this.filteredData = sortData(this.filteredData, 'price', 'down');
         this.rerender();
         this.cancelAllSortings();
         this.priceSort.elem.classList.add('cell-chosen'); 
@@ -173,7 +181,7 @@ export default class List {
       const target = evt.target;
 
       if (target.classList.contains('sort-link-up')) {
-        this.data = sortData(this.data, 'floor', 'up');
+        this.filteredData = sortData(this.filteredData, 'floor', 'up');
         this.rerender();
         this.cancelAllSortings();
         this.floorSort.elem.classList.add('cell-chosen'); 
@@ -181,7 +189,7 @@ export default class List {
       }
 
       if (target.classList.contains('sort-link-down')) {
-        this.data = sortData(this.data, 'floor', 'down');
+        this.filteredData = sortData(this.filteredData, 'floor', 'down');
         this.rerender();
         this.cancelAllSortings();
         this.floorSort.elem.classList.add('cell-chosen'); 
@@ -191,7 +199,7 @@ export default class List {
 
     this.buttonMore.addEventListener('click', (evt) => {
       evt.preventDefault();
-      if (this.itemsShown < this.data.length) {
+      if (this.itemsShown < this.filteredData.length) {
         this.showMore();
       }
     });

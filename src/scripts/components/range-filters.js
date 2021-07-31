@@ -32,9 +32,8 @@ export default class Filters {
     this.slider.style.paddingRight = 0;
     this.track.style.width = this.inputsRy.sliderWidth + 'px';
 
-    this.thumbs[0].style.left = 0 + 'px';
-    this.thumbs[1].style.left = this.slider.style.width + 'px';
-    //this.thumbs[1].style.left = (this.inputsRy.theValue[1] - this.inputsRy.minRange) * this.coefficient - (this.inputsRy.thumbWidth / 2) + 'px';
+    this.thumbs[0].style.left = 0;
+    this.thumbs[1].style.left = (this.inputsRy.theValue[1] - this.inputsRy.minRange) * this.coefficient - (this.inputsRy.thumbWidth / 2) + 'px';
 
     for (let i = 0; i < this.outputs.length; i++) {
       this.outputs[i].value = this.inputsRy.theValue[i];
@@ -56,7 +55,7 @@ export default class Filters {
       this.isDragging0 = false;
       this.isDragging1 = false;
     }, false);
-
+    
     this.wrapper.addEventListener('mouseout', (evt) => {
       this.isDragging0 = false;
       this.isDragging1 = false;
