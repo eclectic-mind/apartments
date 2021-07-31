@@ -1,0 +1,32 @@
+@import "../variables";
+
+.up-link {
+  width: $up-link-size;
+  height: $up-link-size;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background-color: $color-bg;
+  background-image: url('../../assets/img/arrow-up.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 8px;
+  display: block;
+  margin: 0 104px 32px 0;
+  transition: all ease 0.3ms;
+
+  @media screen and (max-width: $breakpoint-big) {
+    margin: 0 30px 30px 0;
+  }
+
+  &:hover {
+    background-color: $color-accent;
+  }
+
+  &:focus,
+  &:active {
+    background-color: $color-accent;
+    box-shadow: $flat-block-box-shadow;
+  }
+}

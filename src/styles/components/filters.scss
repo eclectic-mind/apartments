@@ -1,0 +1,221 @@
+@import "../variables";
+@import "../mixins";
+
+.filters {
+  width: $filters-width;
+  max-width: $filters-width;
+  min-width: $filters-min-width;
+  padding: 40px;
+  border-radius: $filters-border-radius;
+  background: $filters-bg;
+
+  @media screen and (max-width: $breakpoint-big) {
+    padding: 20px 19px;
+    max-width: $filters-min-width;
+    width: $filters-min-width;
+  }
+
+  @media screen and (max-width: $breakpoint-small) {
+    order: 0;
+    width: 100%;
+    max-width: 100%;
+
+    &::before {
+      content: "Квартиры";
+      font-size: 46px;
+      font-weight: bold;
+      display: block;
+      margin: 0 0 20px 0;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-micro) {
+    max-width:100%;
+    width:100%;
+    min-width: 100%;
+
+    &::before {
+      font-size: 40px;
+    }
+  }
+}
+
+.filters-fieldset {
+  border-width: 0px;
+  padding: 0;
+  margin: 24px 0 0 0;
+
+  &.rooms-values {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  &:first-of-type {
+    margin: 0;
+  }
+
+  .filters-fieldset-legend {
+    font-size: $small-font-size;
+    line-height: $small-line-height;
+    margin: 0;
+    padding: 0;
+
+    @media screen and (max-width: $breakpoint-big) {
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
+
+  .slider {
+    pointer-events: none;
+    margin: 0px;
+    cursor: pointer;
+    background: $filter-line-bg;
+  }
+
+  .thumb {
+    cursor: pointer;
+    background-color: $color-accent;
+    border-radius: 50%;
+    position: absolute;
+    width: $filter-drawer-size;
+    height: $filter-drawer-size;
+    top: -6px;
+  }
+
+  .track {
+    pointer-events: none;
+    height: 3px;
+    background-color: $color-accent;
+  }
+
+  .drawer-wrapper {
+    position: relative;
+    margin: 12px auto 8px auto;
+    width: 100%;
+
+    @media screen and (max-width: $breakpoint-big) {
+      margin: 12px auto 4px auto;
+    }
+  }
+
+  .filters-output {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 12px 0 0 0;
+
+    @media screen and (max-width: $breakpoint-big) {
+      font-size: $small-font-size;
+    }
+  }
+
+  .output-half {
+    flex-grow: 1;
+
+    .output {
+      pointer-events: none;
+      color: $color-font-basic;
+      opacity: 1;
+      margin: 0 6px;
+    }
+
+    .output-text {
+      color: $color-font-basic;
+      opacity: $font-light-opacity;
+      margin: 8px 0 6px 0;
+    }
+  }
+
+}
+
+.filter-rooms-label {
+  width: $filter-rooms-size;
+  height: $filter-rooms-size;
+  font-size: $basic-font-size;
+  color: $color-font-basic;
+  background-color: $color-white;
+  text-align: center;
+  line-height: 2.7;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-accent;
+    color: $color-white;
+  }
+}
+
+.filter-rooms-input {
+  @include invis;
+}
+
+.filter-rooms-input:checked+label {
+  background-color: $color-accent;
+  color: $color-white;
+  box-shadow: $active-filter-box-shadow;
+}
+
+.filter-rooms-input:disabled+label {
+  color: #d2d2d2;
+
+  &:hover {
+    cursor: default;
+    color: #d2d2d2;
+    background-color: $color-white;
+  }
+}
+
+.filters-button {
+  background: transparent;
+  color: $color-black;
+  border: 0;
+  padding: 5px 18px 7px;
+  margin: 22px 0 0 0;
+  font-size: $small-font-size;
+  font-family: "PT Root UI Regular", Arial, Helvetica, sans-serif;
+
+  @media screen and (max-width: $breakpoint-big) {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .cross {
+    display: inline-block;
+    position: relative;
+    width: 8px;
+    height: 8px;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      background-color: $color-font-basic;
+      width: 11px;
+      height: 2px;
+      position: absolute;
+      bottom: 4px;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+      left: 0;
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+      right: -3px;
+    }
+  }
+
+  &:hover {
+    color: $color-accent;
+    cursor: pointer;
+
+    .cross::before,
+    .cross::after {
+      background-color: $color-accent;
+    }
+  }
+}

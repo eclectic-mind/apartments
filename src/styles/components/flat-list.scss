@@ -1,0 +1,298 @@
+@import "../variables";
+@import "../mixins";
+
+.flats {
+  flex-grow: 1;
+
+  @media screen and (max-width: $breakpoint-small) {
+    order: 1;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.flats-list {
+  width: 100%;
+  margin: 48px 0;
+
+  @media screen and (max-width: $breakpoint-big) {
+    margin: 32px 0 24px 0;
+  }
+
+  @media screen and (max-width: $breakpoint-small) {
+    margin: 0 0 24px 0;
+  }
+}
+
+.price-cell {
+  width: 15%;
+}
+
+.area-cell,
+.floor-cell {
+  width: 17%;
+}
+
+.plan-cell {
+  order: 0;
+}
+
+.area-cell {
+  order: 2;
+}
+
+.floor-cell {
+  order: 3;
+}
+
+.price-cell {
+  order: 4
+}
+
+.title-cell {
+  flex-grow: 1;
+  order: 1;
+}
+
+.flats-list-head {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: $color-row-border;
+
+  @media screen and (max-width: $breakpoint-big) {
+    border: 0;
+    justify-content: left;
+  }
+
+  .flats-list-head__cell {
+    font-size: $small-font-size;
+    padding: 0 20px 17px 0;
+    display: flex;
+    flex-wrap: nowrap;
+
+    @media screen and (max-width: $breakpoint-big) {
+      width: fit-content;
+      padding: 0 20px 14px 0;
+    }
+
+    @media screen and (max-width: $breakpoint-micro) {
+      padding: 0 20px 10px 0;
+    }
+
+    &.cell-chosen {
+      color: $color-accent;
+    }
+  }
+
+  .plan-cell {
+    @media screen and (max-width: $breakpoint-big) {
+      @include invis;
+    }
+  }
+
+  .title-cell {
+    @media screen and (max-width: $breakpoint-big) {
+      @include invis;
+    }
+  }
+
+  .date-cell {
+    @include invis;
+    order: 10;
+    width: 0;
+
+    @media screen and (max-width: $breakpoint-big) {
+      display: flex;
+      visibility: visible;
+      order: 3;
+      min-width: fit-content;
+    }
+  }
+
+}
+
+.flats-list-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0;
+
+  @media screen and (max-width: $breakpoint-big) {
+    gap: 4px;
+  }
+
+  .flat-list-body__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: $color-row-border;
+
+    @media screen and (max-width: $breakpoint-big) {
+      border-width: 1px;
+      border-radius: $flat-border-radius;
+      padding: 0 0 0 24px;
+      display: inline-block;
+    }
+
+    .flats-list-body__cell {
+      padding: 20px 20px 16px 0;
+
+      @media screen and (max-width: $breakpoint-big) {
+        font-size: $small-font-size;
+        display: block;
+        float: left;
+        padding: 18px 35px 8px 0;
+
+        &.plan-cell {
+          padding: 18px 20px 8px 0;
+        }
+      }
+
+      @media screen and (max-width: $breakpoint-micro) {
+        float: none;
+        padding: 5px 10px 5px 0
+      }
+    }
+
+    .title-cell {
+
+      @media screen and (max-width: $breakpoint-big) {
+        width: 70%;
+        padding-bottom: 0px;
+      }
+
+      @media screen and (max-width: $breakpoint-micro) {
+        width: fit-content;
+      }
+    }
+
+    .plan-cell {
+      @media screen and (max-width: $breakpoint-big) {
+        width: 30%;
+        float: right;
+        text-align: right;
+      }
+
+      @media screen and (max-width: $breakpoint-micro) {
+        width: fit-content;
+      }
+    }
+
+    .area-cell {
+      @media screen and (max-width: $breakpoint-big) {
+        width: fit-content;
+      }
+    }
+
+    .floor-cell {
+      .fl {
+        visibility: hidden;
+      }
+
+      @media screen and (max-width: $breakpoint-big) {
+        width: fit-content;
+
+        .fl {
+          visibility: visible;
+        }
+      }
+    }
+
+    .price-cell {
+      .ruble {
+        visibility: hidden;
+      }
+
+      @media screen and (max-width: $breakpoint-big) {
+        width: fit-content;
+
+        .ruble {
+          visibility: visible;
+        }
+      }
+    }
+
+  }
+}
+
+.sort-links {
+  display: inline-block;
+  position: relative;
+  width: 8px;
+  height: 18px;
+  margin: 0 0 -4px 8px;
+
+  .sort-link {
+    width: 8px;
+    height: 6px;
+    display: block;
+    position: absolute;
+
+    &::before,
+    &::after {
+      content: "";
+      width: 5px;
+      height: 2px;
+      background-color: $color-font-basic;
+      opacity: $font-light-opacity;
+      display: block;
+      position: absolute;
+    }
+
+    &.sort-link-up {
+      top: 0;
+
+      &::before,
+      &::after {
+        bottom: 0;
+      }
+
+      &::before {
+        transform: rotate(-45deg);
+        left: 0;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+        right: 0;
+      }
+    }
+
+    &.sort-link-down {
+      bottom: 0;
+
+      &::before,
+      &::after {
+        top: 0;
+      }
+
+      &::before {
+        transform: rotate(-45deg);
+        right: 0;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+        left: 0;
+      }
+    }
+
+    &.sort-chosen {
+      &::before,
+      &::after {
+        background-color: $color-accent;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.max {
+  opacity: $font-light-opacity;
+}

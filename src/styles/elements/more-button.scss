@@ -1,0 +1,25 @@
+@import "../variables";
+
+.more-button {
+  border: 1px solid $color-btn-border;
+  border-radius: $more-border-radius;
+  background-color: $color-white;
+  padding: 10px 24px;
+  font-size: $basic-font-size;
+  transition: all ease 0.3ms;
+
+  @media screen and (max-width: $breakpoint-big) {
+    font-size: 15px;
+  }
+
+  &:hover {
+    background-color: $color-accent;
+    color: $color-white;
+  }
+
+  &:active {
+    background-color: $color-accent;
+    color: $color-white;
+    box-shadow: $active-filter-box-shadow;
+  }
+}

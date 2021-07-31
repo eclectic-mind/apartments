@@ -1,0 +1,46 @@
+$color-white: #ffffff;
+$color-black: #000000;
+$color-font-basic: #0B1739;
+$color-accent: #3EB57C;
+$color-bg: #95D0A1;
+$filter-line-bg: #cdded4;
+$color-btn-border: rgba(11, 23, 57, 0.2);
+$color-row-border: rgba(0, 0, 0, 0.1);
+
+$font-light-opacity: .5;
+$font-filters-light-opacity: .2;
+$filter-line-opacity: .1;
+
+$filters-bg: linear-gradient(135deg, rgba(174, 228, 178, 0.3) 0%, rgba(149, 208, 161, 0.3) 100%);
+
+$active-filter-box-shadow: 0px 6px 20px #95D0A1;
+$flat-block-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+
+$h1-font-size: 54px;
+$h1-line-height: 56px;
+$h1-small-font-size:  40px;
+$h1-small-line-height: 46px;
+
+$basic-font-size: 16px;
+$basic-line-height: 24px;
+$small-font-size: 14px;
+$small-line-height: 20px;
+
+$filter-rooms-size: 44px;
+$filter-drawer-size: 14px;
+$up-link-size:40px;
+
+$filters-border-radius:10px;
+$flat-border-radius: 8px;
+$more-border-radius: 20px;
+
+$filters-width: 399px;
+$filters-min-width: 318px;
+
+$main-width: 1440px;
+$main-width-small: 960px;
+
+$breakpoint-big: 1500px;
+$breakpoint-middle: 1300px;
+$breakpoint-small: 900px;
+$breakpoint-micro: 400px;

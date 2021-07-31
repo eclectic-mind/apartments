@@ -1,0 +1,47 @@
+aside.filters
+
+  form#filters.filters-form(action="#", name="form", method="POST", novalidate)
+
+    fieldset#filter-rooms.filters-fieldset.rooms-values
+      input(type="radio", name="rooms", value="1")#rooms-1.filter-rooms-input
+      label(for="rooms-1").filter-rooms-label 1к
+      input(type="radio", name="rooms", value="2")#rooms-2.filter-rooms-input
+      label(for="rooms-2").filter-rooms-label 2к
+      input(type="radio", name="rooms", value="3")#rooms-3.filter-rooms-input
+      label(for="rooms-3").filter-rooms-label 3к
+      input(type="radio", name="rooms", value="4", disabled)#rooms-4.filter-rooms-input
+      label(for="rooms-4").filter-rooms-label 4к
+
+    fieldset#filter-price.filters-fieldset
+      legend.filters-fieldset-legend Стоимость квартиры, <span class="ruble"></span>
+
+      .filters-output.filters-output-price
+        .output-half
+          span.output-text от
+          span.output.output-price
+        .output-half
+          span.output-text до
+          span.output.output-price
+      .drawer-wrapper.drawer-wrapper-price
+        .slider.slider-price
+          .track.track-price
+        .thumb.thumb-price
+        .thumb.thumb-price
+
+    fieldset#filter-area.filters-fieldset
+      legend.filters-fieldset-legend Площадь, м<sup>2</sup>
+
+      .filters-output.filters-output-area
+        .output-half
+          span.output-text от
+          span.output.output-area
+        .output-half
+          span.output-text до
+          span.output.output-area
+      .drawer-wrapper.drawer-wrapper-area
+        .slider.slider-area
+          .track.track-area
+        .thumb.thumb-area
+        .thumb.thumb-area
+
+    button(type="reset")#reset.filters-button Сбросить параметры <span class="cross"></span>

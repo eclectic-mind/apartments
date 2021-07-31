@@ -1,0 +1,47 @@
+- var list = [{id: "104", rooms: "3", area: "63,1", floor: "1", max: "17", price: "6630500"}, {id: "105", rooms: "3", area: "63,2", floor: "2", max: "17", price: "6650759"}, {id: "106", rooms: "3", area: "63,2", floor: "3", max: "17", price: "6650759"}, {id: "107", rooms: "3", area: "63,6", floor: "4", max: "17", price: "6671314"}, {id: "108", rooms: "3", area: "63,1", floor: "5", max: "17", price: "6679554"}, {id: "104", rooms: "3", area: "63,1", floor: "1", max: "17", price: "6630500"}, {id: "105", rooms: "3", area: "63,2", floor: "2", max: "17", price: "6650759"}, {id: "106", rooms: "3", area: "63,2", floor: "3", max: "17", price: "6650759"}, {id: "107", rooms: "3", area: "63,6", floor: "4", max: "17", price: "6671314"}, {id: "108", rooms: "3", area: "63,1", floor: "5", max: "17", price: "6679554"}, {id: "104", rooms: "3", area: "63,1", floor: "1", max: "17", price: "6630500"}, {id: "105", rooms: "3", area: "63,2", floor: "2", max: "17", price: "6650759"}, {id: "106", rooms: "3", area: "63,2", floor: "3", max: "17", price: "6650759"}, {id: "107", rooms: "3", area: "63,6", floor: "4", max: "17", price: "6671314"}, {id: "108", rooms: "3", area: "63,1", floor: "5", max: "17", price: "6679554"}]
+
+mixin renderItem(item)
+  - var fulltitle = item.rooms + '-комнатная №' + item.id
+
+  .flat-list-body__row
+    .flats-list-body__cell.plan-cell 
+      img(src= '../assets/img/flat' + item.id + '.svg', alt=item.id).flat-plan
+    .flats-list-body__cell.title-cell !{fulltitle}
+    .flats-list-body__cell.area-cell !{item.area}
+    .flats-list-body__cell.floor-cell !{item.floor} <span class="max">из !{item.max} <span class="fl">этаж</span></span> 
+    .flats-list-body__cell.price-cell !{item.price} <span class="ruble"></span>
+
+section.flats
+
+  h1.page-title Квартиры
+
+  .flats-list
+
+    .flats-list-head
+
+      .flats-list-head__cell.plan-cell Планировка
+      .flats-list-head__cell.title-cell Квартира
+      #sort-area.flats-list-head__cell.area-cell S,&nbsp;м<sup>2</sup>
+        span.sort-links
+          a(href="/").sort-link.sort-link-up#sort-area-up
+          a(href="/").sort-link.sort-link-down#sort-area-down
+      #sort-floor.flats-list-head__cell.floor-cell Этаж
+        span.sort-links
+          a(href="/").sort-link.sort-link-up#sort-floor-up
+          a(href="/").sort-link.sort-link-down#sort-floor-down
+      #sort-price.flats-list-head__cell.price-cell Цена,&nbsp;<span class="ruble"></span>
+        span.sort-links
+          a(href="/").sort-link.sort-link-up#sort-price-up
+          a(href="/").sort-link.sort-link-down#sort-price-down
+      .flats-list-head__cell.date-cell Сдача
+        span.sort-links
+          a(href="/").sort-link.sort-link-up#sort-date-up
+          a(href="/").sort-link.sort-link-down#sort-date-down
+    
+    .flats-list-body
+
+      each elem in list
+        +renderItem(elem)
+
+  include ../elements/more-button.pug
+    

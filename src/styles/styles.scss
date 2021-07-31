@@ -1,0 +1,118 @@
+@import "normalize";
+@import "variables";
+@import "./components/up-link.scss";
+@import "./components/flat-list.scss";
+@import "./components/filters.scss";
+@import "./elements/more-button.scss";
+@import "mixins";
+
+@font-face {
+  font-family: "PT Root UI Bold";
+  src: url("../assets/fonts/PT-Root-UI_Bold.eot");
+  src: local("../assets/fonts/PT Root UI Bold"), local("PTRootUIBold"),
+    url("../assets/fonts/PT-Root-UI_Bold?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/PT-Root-UI_Bold.woff2") format("woff2"),
+    url("../assets/fonts/PT-Root-UI_Bold.woff") format("woff"),
+    url("../assets/fonts/PT-Root-UI_Bold.ttf") format("truetype"),
+    url("../assets/fonts/PT-Root-UI_Bold.svg#PTRootUIBold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PT Root UI Regular";
+  src: url("../assets/fonts/PT-Root-UI_Regular.eot");
+  src: local("../assets/fonts/PT Root UI Regular"), local("PTRootUIRegular"),
+    url("../assets/fonts/PT-Root-UI_Regular?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/PT-Root-UI_Regular.woff2") format("woff2"),
+    url("../assets/fonts/PT-Root-UI_Regular.woff") format("woff"),
+    url("../assets/fonts/PT-Root-UI_Regular.ttf") format("truetype"),
+    url("../assets/fonts/PT-Root-UI_Regular.svg#PTRootUIRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: "PT Root UI Regular", Arial, Helvetica, sans-serif;
+}
+
+strong, b,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "PT Root UI Bold", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.wrapper {
+  background-color: $color-white;
+  position: relative;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  width: $main-width;
+  align-items: start;
+  justify-content: space-around;
+  gap: 80px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 96px 80px;
+  
+  @media screen and (max-width: $breakpoint-big) {
+    gap: 28px;
+    padding: 48px 54px;
+    width: $main-width-small;
+  }
+
+  @media screen and (max-width: $breakpoint-small) {
+    flex-direction: column;
+    padding: 30px;
+    width: 100%;
+    margin: 0 auto 20px auto;
+  }
+
+  @media screen and (max-width: $breakpoint-micro) {
+    padding: 20px;
+  }
+}
+
+.invisible {
+  @include invis;
+}
+
+.ruble {
+  display: inline;
+
+  &::after {
+    content: "\20BD";
+  }
+}
+
+.page-title {
+  font-size: $h1-font-size;
+  line-height: $h1-line-height;
+  font-weight: bold; 
+  margin: 0;
+
+  @media screen and (max-width: $breakpoint-micro) {
+    font-size: $h1-small-font-size;
+    line-height: $h1-small-line-height;
+  }
+
+  @media screen and (max-width: $breakpoint-small) {
+    @include invis;
+  }
+}
+
+.start {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}

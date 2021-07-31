@@ -1,0 +1,19 @@
+doctype html
+html(lang="ru")
+
+  include ./components/head.pug
+
+  body
+
+    .wrapper
+
+      a(href="/")#top.start
+      
+      main.main
+      
+        include ./components/flats-list.pug
+        include ./components/filters.pug
+      
+      include ./components/up-link.pug
+
+    script(src="scripts/bundle.js")
